@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 08</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/estilos.css">
+
+    <!-- Librerias -->
+    <script src="../js/librerias/jquery.min.js"></script>
+    <script src="../js/librerias/gsap.min.js"></script>
+
+    <!-- Script de animaciones -->
+    <script src="../js/animaciones.js"></script>
+
+    <!-- Scripts posicionar elementos -->
+    <script src="../js/redimensionarElementos.js"></script>
+    <script src="../js/posicionar.js"></script>
+
+</head>
+<style>
+    .pointer{
+        cursor: pointer;
+    }
+</style>
+<body class="pagina">
+    <img class="elementos" id="fondo01" src="../img/pagina08/fondo01.png" data-posX="0" data-posY="0"/>
+    <img class="elementos" id="btnComenzar" src="../img/pagina08/btnComenzar.png" data-posX="632" data-posY="445"/>
+
+    <img class="elementos" id="fondo02" src="../img/pagina08/fondo02.png" data-posX="0" data-posY="0"/>
+    <img class="elementos" id="pregunta1" src="../img/pagina08/pregunta1.png" data-posX="118" data-posY="95"/>
+    <img class="elementos" id="pregunta2" src="../img/pagina08/pregunta2.png" data-posX="118" data-posY="95"/>
+    <img class="elementos" id="pregunta3" src="../img/pagina08/pregunta3.png" data-posX="118" data-posY="95"/>
+    <img class="elementos" id="pregunta4" src="../img/pagina08/pregunta4.png" data-posX="118" data-posY="95"/>
+    <img class="elementos" id="pregunta5" src="../img/pagina08/pregunta5.png" data-posX="118" data-posY="95"/>
+    <img class="elementos pointer" id="verdadero1" src="../img/pagina08/verdadero1.png" data-posX="146" data-posY="328"/>
+    <img class="elementos pointer" id="falso1" src="../img/pagina08/falso1.png" data-posX="678" data-posY="329"/>
+    <img class="elementos pointer" id="verdadero2" src="../img/pagina08/verdadero2.png" data-posX="146" data-posY="328"/>
+    <img class="elementos pointer" id="falso2" src="../img/pagina08/falso2.png" data-posX="678" data-posY="329"/>
+    <img class="elementos pointer" id="verdadero3" src="../img/pagina08/verdadero3.png" data-posX="146" data-posY="328"/>
+    <img class="elementos pointer" id="falso3" src="../img/pagina08/falso3.png" data-posX="678" data-posY="329"/>
+    <img class="elementos pointer" id="verdadero4" src="../img/pagina08/verdadero4.png" data-posX="146" data-posY="328"/>
+    <img class="elementos pointer" id="falso4" src="../img/pagina08/falso4.png" data-posX="678" data-posY="329"/>
+    <img class="elementos pointer" id="verdadero5" src="../img/pagina08/verdadero5.png" data-posX="146" data-posY="328"/>
+    <img class="elementos pointer" id="falso5" src="../img/pagina08/falso5.png" data-posX="678" data-posY="329"/>
+
+    <img class="elementos" id="retroBuena" src="../img/pagina08/retroBuena.png" data-posX="0" data-posY="0"/>
+    <img class="elementos" id="retroMala" src="../img/pagina08/retroMala.png" data-posX="0" data-posY="0"/>
+    <img class="elementos" id="btnReiniciar" src="../img/pagina08/btnReiniciar.png" data-posX="650" data-posY="423"/>
+    <p class="elementos" id="calificacion" style="color: white;"></p>
+
+    
+    <!-- Script de la página -->
+    <script>
+
+        // Variable----------------------------------------------------
+        let aplicacion = parent;
+
+        const fondo01 = $('#fondo01');
+        const btnComenzar = $('#btnComenzar');
+
+        const fondo02 = $('#fondo02');
+        const pregunta1 = $('#pregunta1');
+        const pregunta2 = $('#pregunta2');
+        const pregunta3 = $('#pregunta3');
+        const pregunta4 = $('#pregunta4');
+        const pregunta5 = $('#pregunta5');
+        const verdadero1 = $('#verdadero1');
+        const verdadero2 = $('#verdadero2');
+        const verdadero3 = $('#verdadero3');
+        const verdadero4 = $('#verdadero4');
+        const verdadero5 = $('#verdadero5');
+        const falso1 = $('#falso1');
+        const falso2 = $('#falso2');
+        const falso3 = $('#falso3');
+        const falso4 = $('#falso4');
+        const falso5 = $('#falso5');
+
+        const retroBuena = $('#retroBuena');
+        const retroMala = $('#retroMala');
+        const btnReiniciar = $('#btnReiniciar');
+
+
+        let aciertos = 0;
+
+        // Audios------------------------------------------------------
+        const audio = [
+            new Audio('../audios/TMS_OEA_M5_08_1.mp3'),
+            new Audio('../audios/TMS_OEA_M5_08_2.mp3'),
+            new Audio('../audios/TMS_OEA_M5_08_3.mp3'),
+        ]
+
+        // Al cargarse la página
+        $(window).on("load", function(){
+            redimensionarElementos();
+            aplicacion.cargando(iniciarContenido);
+        });
+
+        function iniciarContenido(){
+            aplicacion.reproducirAudio(audio[0], clickBtnComenzar, 1);
+            animacionEntrada(fondo01, 'default', 1); 
+        }
+
+        function clickBtnComenzar(){
+            parpadear(btnComenzar);
+        }
+
+        function question1(){
+            animacionEntrada(fondo02, 'default', 1);
+            animacionEntrada(pregunta1, 'derecha-izquierda', 1,1);
+            animacionEntrada(verdadero1, 'derecha-izquierda', 1, 1.5);
+            animacionEntrada(falso1, 'derecha-izquierda', 1, 2);
+        }
+        function question2(){
+            animacionEntrada(pregunta2, 'derecha-izquierda', 1,1);
+            animacionEntrada(verdadero2, 'derecha-izquierda', 1, 1.5);
+            animacionEntrada(falso2, 'derecha-izquierda', 1, 2);
+        }
+        function question3(){
+            animacionEntrada(pregunta3, 'derecha-izquierda', 1,1);
+            animacionEntrada(verdadero3, 'derecha-izquierda', 1, 1.5);
+            animacionEntrada(falso3, 'derecha-izquierda', 1, 2);
+        }
+        function question4(){
+            animacionEntrada(pregunta4, 'derecha-izquierda', 1,1);
+            animacionEntrada(verdadero4, 'derecha-izquierda', 1, 1.5);
+            animacionEntrada(falso4, 'derecha-izquierda', 1, 2);
+        }
+        function question5(){
+            animacionEntrada(pregunta5, 'derecha-izquierda', 1,1);
+            animacionEntrada(verdadero5, 'derecha-izquierda', 1, 1.5);
+            animacionEntrada(falso5, 'derecha-izquierda', 1, 2);
+        }
+
+        //Evaluacion
+        function evaluacion(){
+            const calificacion = ((aciertos * 100) / 5).toFixed();
+
+            if(calificacion >= 80){
+                retroalimentacionBuena(calificacion);
+
+            }else if(calificacion < 80){
+                retroalimentacionMala(calificacion);
+            }
+            
+            aplicacion.guardarCalificacion(calificacion);
+        }
+
+        function retroalimentacionBuena(calificacion){
+            animacionSalida(fondo02, 'default', 1);
+
+            setTimeout(() => {
+                const p = $('#calificacion');
+
+                p.html(`${calificacion}`);
+                p.css({
+                    'fontSize': '32px',
+                    'top': '397px',
+                    'left': '750px'
+                });
+
+                aplicacion.reproducirAudio(audio[1], finalPagina, 1);
+                animacionEntrada(p, 'default', 1, 1);
+                animacionEntrada(retroBuena, 'default', 1, 1);
+            }, 1000);
+        }
+        function retroalimentacionMala(calificacion){
+            animacionSalida(fondo02, 'default', 1);
+
+            setTimeout(() => {
+                const p = $('#calificacion');
+
+                p.html(`${calificacion}`);
+                p.css({
+                    'fontSize': '32px',
+                    'top': '173px',
+                    'left': '730px'
+                });
+
+                aplicacion.reproducirAudio(audio[2], clickReintentar, 1);
+                animacionEntrada(p, 'default', 1, 1);
+                animacionEntrada(retroMala, 'default', 1, 1);
+            }, 1000);
+        }
+
+        function clickReintentar(){
+            parpadear(btnReiniciar)
+        }
+
+        function finalPagina(){
+            aplicacion.terminaPantalla();
+        }
+
+
+        //Funcionalidad Botones
+        btnComenzar.click(function(){
+            if(btnComenzar.css('cursor') == 'pointer'){
+                dejarParpadear(btnComenzar);
+                animacionSalida(fondo01, 'default', 1, 1);
+                animacionSalida(btnComenzar, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question1();
+                }, 1000);
+            }
+        });
+
+        // Pregunta 1
+        verdadero1.click(function(){
+            if(verdadero1.css('cursor') == 'pointer'){
+                aciertos++;
+                animacionSalida(pregunta1, 'default', 1, 1);
+                animacionSalida(verdadero1, 'default', 1, 1);
+                animacionSalida(falso1, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question2();
+                }, 1000);
+            }
+        });
+        falso1.click(function(){
+            if(falso1.css('cursor') == 'pointer'){
+                animacionSalida(pregunta1, 'default', 1, 1);
+                animacionSalida(verdadero1, 'default', 1, 1);
+                animacionSalida(falso1, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question2();
+                }, 1000);
+            }
+        });
+
+        // Pregunta 2
+        verdadero2.click(function(){
+            if(verdadero2.css('cursor') == 'pointer'){
+                aciertos++;
+                animacionSalida(pregunta2, 'default', 1, 1);
+                animacionSalida(verdadero2, 'default', 1, 1);
+                animacionSalida(falso2, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question3();
+                }, 1000);
+            }
+        });
+        falso2.click(function(){
+            if(falso2.css('cursor') == 'pointer'){
+                animacionSalida(pregunta2, 'default', 1, 1);
+                animacionSalida(verdadero2, 'default', 1, 1);
+                animacionSalida(falso2, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question3();
+                }, 1000);
+            }
+        });
+
+        // Pregunta 3
+        verdadero3.click(function(){
+            if(verdadero3.css('cursor') == 'pointer'){
+                animacionSalida(pregunta3, 'default', 1, 1);
+                animacionSalida(verdadero3, 'default', 1, 1);
+                animacionSalida(falso3, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question4();
+                }, 1000);
+            }
+        });
+        falso3.click(function(){
+            if(falso3.css('cursor') == 'pointer'){
+                aciertos++;
+                animacionSalida(pregunta3, 'default', 1, 1);
+                animacionSalida(verdadero3, 'default', 1, 1);
+                animacionSalida(falso3, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question4();
+                }, 1000);
+            }
+        });
+
+        // Pregunta 4
+        verdadero4.click(function(){
+            if(verdadero4.css('cursor') == 'pointer'){
+                aciertos++;
+                animacionSalida(pregunta4, 'default', 1, 1);
+                animacionSalida(verdadero4, 'default', 1, 1);
+                animacionSalida(falso4, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question5();
+                }, 1000);
+            }
+        });
+        falso4.click(function(){
+            if(falso4.css('cursor') == 'pointer'){
+                animacionSalida(pregunta4, 'default', 1, 1);
+                animacionSalida(verdadero4, 'default', 1, 1);
+                animacionSalida(falso4, 'default', 1, 1);
+
+                setTimeout(() => {
+                    question5();
+                }, 1000);
+            }
+        });
+
+        // Pregunta 5
+        verdadero5.click(function(){
+            if(verdadero5.css('cursor') == 'pointer'){
+                animacionSalida(pregunta5, 'default', 1, 1);
+                animacionSalida(verdadero5, 'default', 1, 1);
+                animacionSalida(falso5, 'default', 1, 1);
+
+                setTimeout(() => {
+                    evaluacion();
+                }, 1000);
+            }
+        });
+        falso5.click(function(){
+            if(falso5.css('cursor') == 'pointer'){
+                aciertos++;
+                animacionSalida(pregunta5, 'default', 1, 1);
+                animacionSalida(verdadero5, 'default', 1, 1);
+                animacionSalida(falso5, 'default', 1, 1);
+
+                setTimeout(() => {
+                    evaluacion();
+                }, 1000);
+            }
+        });
+
+
+        btnReiniciar.click(function(){
+            if(btnReiniciar.css('cursor') == 'pointer'){
+                dejarParpadear(btnReiniciar);
+                aplicacion.recargarPagina();
+            }
+        });
+
+    </script>
+</body>
+</html>
